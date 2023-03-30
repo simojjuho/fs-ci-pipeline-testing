@@ -22,7 +22,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: messages separately, maybe
-        env:
-          MESSAGES_SEP: ${{ toJson(github.event.commits.*.message[0]) }}
-        run: echo "$MESSAGES_SEP"
+      - name: Does echo Succes?
+        if: ${{ contains(toJson(github.event.commits.*.message), '#skip') }}
+        run: echo "Success!"
